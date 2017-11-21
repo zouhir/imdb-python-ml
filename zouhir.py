@@ -44,3 +44,16 @@ for i in range(0, 2000):
     review= ' '.join(review);
     corpus.append(review)
     
+# bag of words
+# Helps creating sprce matrix and reduce amount of words
+# by hand it will be thousands of word and take us forver
+
+from sklearn.feature_extraction.text import CountVectorizer
+cv = CountVectorizer(max_features = 5000)
+
+# sparce matrix
+X = cv.fit_transform(corpus).toarray()
+
+#include the independent varibale so our machine can undertsan the corlelation
+y = dataset.iloc[:, 1].values
+ 
