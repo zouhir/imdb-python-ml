@@ -17,23 +17,30 @@ import pandas as pd;
 dataset = pd.read_csv('~/Projects/Py/Natural_Language_Processing/imdb.tsv', delimiter = '\t', quoting = 3);
 
 # cleaning the text
-# step1: we remove everything that is not a-z and A-Z
 import re
-review = re.sub('[^a-zA-Z]', ' ', dataset['Review'][0])
 
-# step2: all lower case
-review = review.lower()
 
-# step3: remove non significant word
+
 import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
-review = review.split()
-# step4: stemming 
-ps = PorterStemmer()
 
-review = [ps.stem(word) for word in review if not word in set(stopwords.words('english'))]
+# in NLP corpus is collection of text
+corpus = []
 
-review= ' '.join(review);
+for i in range(0, 2000):
+    # step1: we remove everything that is not a-z and A-Z
+    review = re.sub('[^a-zA-Z]', ' ', dataset['Review'][i])
+    
+    # step2: all lower case
+    review = review.lower()
+    review = review.split()
+    # step3: remove non significant word
+    # step4: stemming 
+    ps = PorterStemmer()
+    review = [ps.stem(word) for word in review if not word in set(stopwords.words('english'))]
+    review= ' '.join(review);
+    corpus.append(review)
+    
